@@ -59,14 +59,33 @@ def change_ticket_priority():
     print("Ticket not found .")
 
 def disable_ticket():
-    pass
+    #removing ticket from system by ticket ID
+    ticket_id=input("Enter the ticket ID to disable : ")
+    for ticket in ticket_list:
+        if ticket[0]==ticket_id:
+            ticket_list.remove(ticket)
+            print("Ticket disabled successfully!")
+            return
+    print("Ticket not found ")
+
 def run_event():
-    pass
-                      
+    #display today's events found in the list, sorted by priority,and remove them from the list.
+    
+    today=input("Enter today's date (YYYYMMDD): ")
+    for ticket in ticket_list:
+        if today==ticket[3]:
+            sorted_events=sorted(today,key=lambda x: x[4])
+        if not today:
+            print("No events Today .")
+            return
+        for event in sorted_events:
+            print(",".join(event))
+            ticket_list.remove(event)
+                            
 def admin_menu():
     attempts=0
     while attempts<5:
-        user_name=input("Ente\\\\\\\\\\\\\\\\\r your user name : ")
+        user_name=input("Enter your user name : ")
         password=input("Enter your password : ")
         if user_name=="admin" and password=="admin123123":
             while True:
