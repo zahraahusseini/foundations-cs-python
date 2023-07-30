@@ -8,7 +8,7 @@ def read_file_ticket():
             ticket_list.append(ticket_data)#with append method we add ticket data to ticket list
 
 
-def display_statictics():
+def display_statictics():# the big O of this function is O(n) since n is the length of ticket_list
     #the funtion take a list of ticket as input(ticket_list)
     #check if ticket_list is empty
     if not ticket_list:
@@ -29,7 +29,7 @@ def display_statictics():
     max_tickets=event_count[max_event_id]
     #f-string used to format the output with concatinating variable and expression in some way to appear
     print(f"Event Id with the highest number of tickets:{max_event_id} ({max_tickets})tickets)")
-def book_ticket():
+def book_ticket():# O(1),since it constant time operation dominate by user input
     ticket_id=f"tick{len(ticket_list)+1:03d}"#the tick number formated as 3 digits
     event_id=input("Enter the event ID : ")
     user_name=input("Enter the user name : ")
@@ -39,7 +39,7 @@ def book_ticket():
     ticket_list.append(new_ticket)
     print("Ticket Booked Successfully !! ")
 def display_all_tickets():
-    if not ticket_list:
+    if not ticket_list:#O(N) since n is the lenght of ticket list
         print("No tickets Found .")
         return
     #show all tickets ordered by event's date and event ID
@@ -48,7 +48,7 @@ def display_all_tickets():
     for ticket in sorted_tickets:
         #join method convert every ticket to strings seperated by comma
         print(" , ".join(ticket))
-def change_ticket_priority():
+def change_ticket_priority():#O(N) since n is the number of tickets in ticket list
     ticket_id=input("Enter the ticket ID to change the priority : ")
     for ticket in ticket_list:
         if ticket[0]==ticket_id:
@@ -58,21 +58,21 @@ def change_ticket_priority():
             return
     print("Ticket not found .")
 
-def disable_ticket():
+def disable_ticket():# So its O(n^2)
     #removing ticket from system by ticket ID
-    ticket_id=input("Enter the ticket ID to disable : ")
-    for ticket in ticket_list:
+    ticket_id=input("Enter the ticket ID to disable : ")#O(1)
+    for ticket in ticket_list:#O(n) where n is number of ticket in the list
         if ticket[0]==ticket_id:
-            ticket_list.remove(ticket)
+            ticket_list.remove(ticket)#o(n) ,worst case if the element found at the end of list the method need to iterate the entire list
             print("Ticket disabled successfully!")
             return
     print("Ticket not found ")
 
-def run_event():
+def run_event():#O(n)
     #display today's events found in the list, sorted by priority,and remove them from the list.
     
-    today=input("Enter today's date (YYYYMMDD): ")
-    for ticket in ticket_list:
+    today=input("Enter today's date (YYYYMMDD): ")#0(1)
+    for ticket in ticket_list:#worst case is o(n) whre n is the lenghr of list(may iterate all he list to find the ticket search for)
         if today==ticket[3]:
             sorted_events=sorted(today,key=lambda x: x[4])
         if not today:
@@ -82,13 +82,13 @@ def run_event():
             print(",".join(event))
             ticket_list.remove(event)
                             
-def admin_menu():
+def admin_menu():#WOrst case :O(1)
     attempts=0
     while attempts<5:
-        user_name=input("Enter your user name : ")
+        user_name=input("Enter your user name : ")#O(1) since it compare string directlly
         password=input("Enter your password : ")
-        if user_name=="admin" and password=="admin123123":
-            while True:
+        if user_name=="admin" and password=="admin123123":#O(1) since it compare string directlly
+            while True:#O(1) since it constant time 
                 print("\nAdmin Menu:")
                 print("1. Display Statistics ")
                 print("2. Book Ticket ")
@@ -121,7 +121,7 @@ def admin_menu():
 
     print("Maximum attempts reached.Exit the program .")
 
-def user_menu():
+def user_menu():# O(1) it is a constante time
     while True:
         print("\nUser Menu : ")
         print("1. Book a Ticket ")
@@ -140,12 +140,12 @@ def user_menu():
 
 #write a main  function name main as the starting point of the program
 def main():
-    read_file_ticket()
+    read_file_ticket()#O(N) n represent the number of tickets in the file
     print("Welcome to the Corrupted Ticketing System ! ")
     
-    user_input=input("Type if you are Admin or User : """)
-    if user_input.lower()=="admin":
-        admin_menu()
+    user_input=input("Type if you are Admin or User : """)#O(1) take a constant time
+    if user_input.lower()=="admin":#O(M) m represent the length of user input
+        admin_menu()#O(K) assume is the time complexity of the function
     elif user_input.lower()=="user":
         user_menu()
     else:
