@@ -8,6 +8,36 @@ def read_file_ticket():
             ticket_list.append(ticket_data)#with append method we add ticket data to ticket list
 
 
+def display_statictics():
+    #the funtion take a list of ticket as input(ticket_list)
+    #check if ticket_list is empty
+    if not ticket_list:
+        print("No tickets found. ")
+        return
+    #if ticket_list is not empty the function continue to calculate statistics
+    #use dictinnary to store the count of each event id
+    event_count={}
+    # use for to loop through the ticket_list and count occurences of each event_id
+    for ticket in ticket_list:
+        event_id=ticket[1]
+        event_count[event_id]=event_count.get(event_id,0)+1
+    # Find the event_id with highest number of tickets
+    #use key argument in max function to compare the element in dictionnary and find the
+    #max value where event_id is the key and the ticket count is value the value:https://www.programiz.com/python-programming/methods/built-in/max
+    #use get method to retrieve the value assotiated with a given key
+    max_event_id=max(event_count,key=event_count.get)
+    max_tickets=event_count[max_event_id]
+    #f-string used to format the output with concatinating variable and expression in some way to appear
+    print(f"Event Id with the highest number of tickets:{max_event_id} ({max_tickets})tickets)")
+def book_ticket():
+    ticket_id=f"tick{len(ticket_list)+1:03d}"#the tick number formated as 3 digits
+    event_id=input("Enter the event ID : ")
+    user_name=input("Enter the user name : ")
+    date=input("Enter the date of the evenr (YYYMMDD): ")
+    priority=int(input("Enter the priority : "))
+    new_ticket=[ticket_id,event_id,user_name,date,priority]
+    ticket_list.append(new_ticket)
+    print("Ticket Booked Successfully !! ")
 
 
                       
@@ -50,27 +80,6 @@ def admin_menu():
 
     print("Maximum attempts reached.Exit the program .")
 
-def display_statictics():
-    #the funtion take a list of ticket as input(ticket_list)
-    #check if ticket_list is empty
-    if not ticket_list:
-        print("No tickets found. ")
-        return
-    #if ticket_list is not empty the function continue to calculate statistics
-    #use dictinnary to store the count of each event id
-    event_count={}
-    # use for to loop through the ticket_list and count occurences of each event_id
-    for ticket in ticket_list:
-        event_id=ticket[1]
-        event_count[event_id]=event_count.get(event_id,0)+1
-    # Find the event_id with highest number of tickets
-    #use key argument in max function to compare the element in dictionnary and find the
-    #max value where event_id is the key and the ticket count is value the value:https://www.programiz.com/python-programming/methods/built-in/max
-    #use get method to retrieve the value assotiated with a given key
-    max_event_id=max(event_count,key=event_count.get)
-    max_tickets=event_count[max_event_id]
-    #f-string used to format the output with concatinating variable and expression in some way to appear
-    print(f"Event Id with the highest number of tickets:{max_event_id}(max_tickets)tickets)")
 
 
 #write a main  function name main as the starting point of the program

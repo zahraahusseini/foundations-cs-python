@@ -1,3 +1,4 @@
 tick101,ev003,fred,20230802,0
 tick102,ev002,gio,20230803,2
 tick103,ev001,george,20230804,1
+tick104,ev004,alice,2023080,4,3
