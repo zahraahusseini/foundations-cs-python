@@ -38,6 +38,16 @@ def book_ticket():
     new_ticket=[ticket_id,event_id,user_name,date,priority]
     ticket_list.append(new_ticket)
     print("Ticket Booked Successfully !! ")
+def display_all_tickets():
+    if not ticket_list:
+        print("No tickets Found .")
+        return
+    #show all tickets ordered by event's date and event ID
+    # here the lamda function is used to extract elemetn form the list and use it as a key:https://www.programiz.com/python-programming/methods/built-in/max
+    sorted_tickets=sorted(ticket_list,key=lambda x:(x[3],x[1]))
+    for ticket in sorted_tickets:
+        #join method convert every ticket to strings seperated by comma
+        print(" , ".join(ticket))
 
 
                       
