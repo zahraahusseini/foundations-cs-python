@@ -48,13 +48,25 @@ def display_all_tickets():
     for ticket in sorted_tickets:
         #join method convert every ticket to strings seperated by comma
         print(" , ".join(ticket))
+def change_ticket_priority():
+    ticket_id=input("Enter the ticket ID to change the priority : ")
+    for ticket in ticket_list:
+        if ticket[0]==ticket_id:
+            new_priority=int(input("Enter the new priority : "))
+            ticket[4]=new_priority
+            print("Priority changed successfuly !!")
+            return
+    print("Ticket not found .")
 
-
+def disable_ticket():
+    pass
+def run_event():
+    pass
                       
 def admin_menu():
     attempts=0
     while attempts<5:
-        user_name=input("Enter your user name : ")
+        user_name=input("Ente\\\\\\\\\\\\\\\\\r your user name : ")
         password=input("Enter your password : ")
         if user_name=="admin" and password=="admin123123":
             while True:
@@ -90,7 +102,22 @@ def admin_menu():
 
     print("Maximum attempts reached.Exit the program .")
 
-
+def user_menu():
+    while True:
+        print("\nUser Menu : ")
+        print("1. Book a Ticket ")
+        print("2. Exit ")
+        choice=input("Enter your choice 1-2 ? ")
+        if choice=="1":
+            book_ticket()#already defined 
+        elif choice=="2":
+            print("Saving  tickets and exit the program. ")
+            with open(tickets_file,"w")as file:
+                for ticket in ticket_list:
+                    file.write(",".join(ticket)+"\n")
+            return
+        else:
+            print("Invalid choice.Try again .")
 
 #write a main  function name main as the starting point of the program
 def main():
